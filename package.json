@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "axios": "^1.9.0",
+    "date-fns": "^4.1.0",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.515.0",
     "next": "15.3.3",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.58.0",
     "react-hot-toast": "^2.5.2",
     "zod": "^3.25.64",
     "zustand": "^5.0.5"
