@@ -1,7 +1,11 @@
+import "../globals.css";
 import type { Metadata } from "next";
-import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from "../providers/auth-provider";
+// import { SidebarLayout } from "@/components/ui/sidebar/layout";
+// import { user } from "@/components/ui/sidebar/user";
+// import { publicLinks } from "@/components/ui/sidebar/public-links";
 
 // Configuração de SEO do site:
 
@@ -55,23 +59,25 @@ export default function RootLayout({
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body className={`flex flex-col`}>
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{
-            className: 'bg-background_light text-cinza1 dark:bg-gray-800 dark:text-white border border-cinza4 dark:border-cinza2',
-          }}
-        />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div>
-            {children}
-          </div>
-        </ThemeProvider>
+          <Toaster
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              className: 'bg-background_light text-cinza1 dark:bg-gray-800 dark:text-white border border-cinza4 dark:border-cinza2',
+            }}
+          />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex h-screen w-full">
+              {/* <SidebarLayout links={publicLinks} user={user}>
+              </SidebarLayout> */}
+              {children}
+            </div>
+          </ThemeProvider>
       </body>
     </html>
   );
