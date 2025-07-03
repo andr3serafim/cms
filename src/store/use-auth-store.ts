@@ -18,6 +18,7 @@ interface AuthState {
   fetchUser: () => Promise<void>
   logout: () => Promise<void>
   setUser: (user: User) => void // Nova função para definir usuário diretamente
+  getUser: () => User | null // Getter para o usuário
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -31,6 +32,7 @@ export const useAuthStore = create<AuthState>()(
       setUser: (user: User) => {
         set({ user, isAuthenticated: true });
       },
+      getUser: () => get().user,
 
       fetchUser: async () => {
         const state = get();

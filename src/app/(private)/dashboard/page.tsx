@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 
 export default function Dashboard() {
-  const { isAuthenticated, loading, fetchUser } = useAuthStore()
+  const { isAuthenticated, loading, fetchUser, user } = useAuthStore()
   const route = useRouter();
   const hydrated = useHydration();
 
@@ -39,9 +39,9 @@ export default function Dashboard() {
   }
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Bem-vindo ao painel!</p>
+    <div className='flex flex-col gap-3'>
+      <h1 className='text-xl'>Dashboard</h1>
+      <p>Bem-vindo ao painel, <span className='text-sky-500'>{user?.name}!</span></p>
     </div>
   )
 }

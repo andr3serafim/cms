@@ -1,6 +1,6 @@
 import { Role } from "../enum/role";
 
-export type CreateUser = {
+export type CreateUserType = {
   name: string;
   email: string;
   password: string;

@@ -4,8 +4,6 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from "../providers/auth-provider";
 import { SidebarLayout } from "@/components/ui/sidebar/layout";
-import { user } from "@/components/ui/sidebar/user";
-import { privateLinks } from "@/components/ui/sidebar/private-links";
 
 // Configuração de SEO do site:
 
@@ -74,7 +72,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="flex h-screen w-full">
-              <SidebarLayout links={privateLinks} user={user}>
+              <SidebarLayout>
                 {children}
               </SidebarLayout>
             </div>

@@ -3,21 +3,38 @@ import React, { useState } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/util/cn";
 import { Sidebar, SidebarBody, SidebarLink } from "./components";
+import { privateLinks } from "@/components/ui/sidebar/private-links";
+import { useAuthStore } from "@/store/use-auth-store";
+import Image from "next/image";
 
 interface Links {
   label: string;
   href?: string;
+  function?: () => void;
   icon: React.JSX.Element | React.ReactNode;
 }
 
-interface SidebarLayoutProps {
-  links: Links[];
-  user: Links;
+type SidebarLayoutProps = {
   children: React.ReactNode;
-}
+};
 
-export const SidebarLayout = ({ links, user, children }: SidebarLayoutProps) => {
+export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
+  const { user } = useAuthStore();
   const [open, setOpen] = useState(false);
+  const links: Links[] = privateLinks;
+  const userLink: Links = {
+    label: user?.name || "Usuário",
+    href: "#",
+    icon: (
+      <Image
+        width={50}
+        height={50}
+        src="/assets/avatar.png"
+        className="h-7 w-7 shrink-0 rounded-full"
+        alt="Avatar"
+      />
+    ),
+  };
 
   return (
     <div
@@ -37,7 +54,7 @@ export const SidebarLayout = ({ links, user, children }: SidebarLayoutProps) => 
             </div>
           </div>
           <div>
-            <SidebarLink link={user} />
+            <SidebarLink link={userLink} />
           </div>
         </SidebarBody>
       </Sidebar>
