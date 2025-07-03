@@ -9,7 +9,10 @@ export const passwordValidationSchema = z.string()
   .regex(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~`]/, "Pelo menos um caractere especial");
 
 export const registerSchema = z.object({
-  name: z.string().min(3, "Informe seu nome completo").max(50, "Informe seu nome completo"),
+  name: z.string()
+    .min(3, "Nome deve ter no mínimo 3 caracteres")
+    .max(50, "Nome deve ter no máximo 50 caracteres")
+    .regex(/^[a-zA-Z\s]+$/, { message: "Use apenas letras", }),
   email: z.string().email("Informe um email válido"),
   password: passwordValidationSchema,
   confirmPassword: z.string(),

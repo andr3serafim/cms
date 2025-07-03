@@ -39,9 +39,9 @@ export default function ZodIntegrationExample() {
     }
     setIsSubmitting(true)
     try {
-      const request = await userRegister(payload);
+      const registerSuccess = await userRegister(payload);
 
-      if (request) {
+      if (registerSuccess) {
         route.push('/login');
       }
 
@@ -73,7 +73,7 @@ export default function ZodIntegrationExample() {
           label="Nome"
           placeholder="Digite seu email"
           {...register('name')}
-          zodMessage={errors.email?.message}
+          zodMessage={errors.name?.message}
           required
           icon={<FaUser className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={12} />} />
 
@@ -115,9 +115,13 @@ export default function ZodIntegrationExample() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full mt-5 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors disabled:bg-gray-400"
+          className="w-full mt-5 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors"
         >
-          {isSubmitting ? 'Cadastrando...' : 'Cadastrar'}
+          {isSubmitting ?
+            <div className="flex justify-center gap-4">
+              <div className="w-6 h-6 border-[3px] border-t-transparent rounded-full animate-spin"></div>
+              <span>Cadastrando</span>
+            </div> : <span>Cadastrar</span>}
         </button>
       </form>
     </div>
