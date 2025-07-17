@@ -1,5 +1,7 @@
 'use client'
 
+import FileUpload from '@/components/file-upload';
+// import useCheckJwt from '@/hooks/use-check-jwt';
 import { useHydration } from '@/hooks/use-hydratation';
 import { useAuthStore } from '@/store/use-auth-store';
 import { useRouter } from 'next/navigation';
@@ -10,9 +12,11 @@ export default function Dashboard() {
   const route = useRouter();
   const hydrated = useHydration();
 
+  // useCheckJwt()
   useEffect(() => {
     // Buscar dados do usuário quando o componente montar
     if (hydrated && !isAuthenticated && !loading) {
+
       fetchUser();
     }
   }, [hydrated, isAuthenticated, loading, fetchUser]);
@@ -28,7 +32,7 @@ export default function Dashboard() {
   if (!hydrated || loading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin" />
+        <div className="w-16 h-16 border-4 border-gray-300 border-t-lime-500 rounded-full animate-spin" />
       </div>
     );
   }
@@ -41,7 +45,10 @@ export default function Dashboard() {
   return (
     <div className='flex flex-col gap-3'>
       <h1 className='text-xl'>Dashboard</h1>
-      <p>Bem-vindo ao painel, <span className='text-sky-500'>{user?.name}!</span></p>
+      <p>Bem-vindo ao painel, <span className='text-lime-500'>{user?.name}!</span></p>
+      <div>
+        <FileUpload />
+      </div>
     </div>
   )
 }

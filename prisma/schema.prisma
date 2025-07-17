@@ -9,17 +9,62 @@ datasource db {
 }
 
 model User {
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
+  password      String?
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  image         String?
+  emailVerified DateTime?
+
+  posts    Post[] // Relacionamento com posts
+  accounts Account[] // Relacionamento com contas do NextAuth
+  sessions Session[] // Relacionamento com sessões do NextAuth
+}
+
+model Post {
   id        String   @id @default(uuid())
-  name      String   
-  email     String   @unique
-  password  String
-  role      Role     @default(USER)
+  title     String
+  slug      String   @unique
+  content   String
+  published Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  type              String
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId]) // 👈 ESSA LINHA FALTANDO CAUSA O ERRO
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id])
 }
 
 enum Role {
-  ADMIN
-  EDITOR
   USER
+  EDITOR
+  ADMIN
 }

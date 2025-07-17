@@ -1,8 +1,10 @@
 "use client";
+
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { cn } from "@/lib/util/cn";
+import { usePathname } from "next/navigation";
 
 interface Links {
   label: string;
@@ -164,6 +166,10 @@ export const SidebarLink = ({
   className?: string;
 }) => {
   const { open, animate } = useSidebar();
+  const path = usePathname();
+  const isActive = path === link.href ? true : false;
+  const isLogout = link.label === "Logout";
+
   return (
     <button
       onClick={() => {
@@ -174,7 +180,7 @@ export const SidebarLink = ({
         }
       }}
       className={cn(
-        "flex items-center justify-start gap-2  group/sidebar py-2",
+        "flex items-center justify-start gap-2 group/sidebar py-2",
         className
       )}
       {...props}
@@ -186,7 +192,7 @@ export const SidebarLink = ({
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
           opacity: animate ? (open ? 1 : 0) : 1,
         }}
-        className="text-neutral-700 dark:text-neutral-200 text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+        className={`${isLogout ? 'hover:dark:text-red-400' : 'text-neutral-700 dark:text-neutral-300 dark:hover:text-white'} ${isActive ? 'font-semibold dark:text-neutral-50 text-neutral-900' : ''} text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0`}
       >
         {link.label}
       </motion.span>

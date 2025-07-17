@@ -15,6 +15,7 @@ type InputPasswordConfirmProps = {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     width?: string;
+    labelStyle?: string;
     zodMessage?: string;
     enableMatchValidation?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
@@ -30,6 +31,7 @@ export default function InputPasswordConfirm({
     onChange,
     className,
     width,
+    labelStyle,
     zodMessage,
     enableMatchValidation = true,
     ...rest
@@ -70,7 +72,7 @@ export default function InputPasswordConfirm({
     return (
         <div className={`flex flex-col gap-2 ${width ?? "max-w-[480px] w-full"}`}>
             {label && (
-                <label className="text-cinza1 dark:text-white text-sm font-poppins">
+                <label className={`${labelStyle ?? 'text-cinza1 dark:text-white'} text-sm font-poppins`}>
                     {label}
                 </label>
             )}

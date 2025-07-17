@@ -15,6 +15,7 @@ type InputPasswordProps = {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     width?: string;
+    labelStyle?: string
     zodMessage?: string;
     showValidation?: boolean;
     validationRules?: ValidationRules;
@@ -30,6 +31,7 @@ export default function InputPassword({
     onChange,
     className,
     width,
+    labelStyle,
     zodMessage,
     showValidation = false,
     validationRules,
@@ -80,7 +82,7 @@ export default function InputPassword({
     return (
         <div className={`flex flex-col gap-2 ${width ?? "max-w-[480px] w-full"}`}>
             {label && (
-                <label className="text-cinza1 dark:text-white text-sm font-poppins">
+                <label className={`${labelStyle ?? 'text-cinza1 dark:text-white'} text-sm font-poppins`}>
                     {label}
                 </label>
             )}
@@ -113,9 +115,9 @@ export default function InputPassword({
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-white cursor-pointer"
                 >
                     {showPassword ? (
-                        <IoEyeOff size={18} className="text-gray-400" />
+                        <IoEyeOff size={18} className="text-gray-300" />
                     ) : (
-                        <IoEye size={18} className="text-gray-400" />
+                        <IoEye size={18} className="text-gray-300" />
                     )}
                 </div>
             </div>

@@ -13,6 +13,8 @@ type InputProps = {
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     className?: string;
     width?: string;
+    labelStyle?: string;
+    backgroundColor?: string;
     zodMessage?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -27,6 +29,8 @@ export default function InputDefault({
     onChange,
     className,
     width,
+    labelStyle,
+    backgroundColor,
     zodMessage,
     type = "text",
     ...rest
@@ -54,7 +58,7 @@ export default function InputDefault({
     return (
         <div className={`flex flex-col gap-2 ${width ?? "max-w-[480px] w-full"}`}>
             {label && (
-                <label className="text-cinza1 dark:text-white text-sm font-poppins">
+                <label className={`${labelStyle ?? 'text-cinza1 dark:text-white'} text-sm font-poppins`}>
                     {label}
                 </label>
             )}
@@ -69,11 +73,11 @@ export default function InputDefault({
                     className={`
                         ${className} 
                         ${width ?? "max-w-[480px] w-full"} 
+                        ${backgroundColor ?? "bg-white"}
                         h-[38px] py-3 pl-4 pr-10 
                         border border-cinza3 rounded-md 
-                        focus:outline-none text-black 
+                        focus:outline-none text-gray-800
                         focus:ring-2 focus:ring-gray-400 
-                        dark:bg-white 
                         ${fontSize ?? "text-sm"}
                         ${zodMessage ? 'border-red-400' : ''}
                     `}

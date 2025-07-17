@@ -2,6 +2,8 @@ import ToasterClient from "@/components/toaster-client-side";
 import "../globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import GridBackground from "@/components/ui/grid-background";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 // Configuração de SEO do site:
 
@@ -52,22 +54,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="pt-br" suppressHydrationWarning>
       <body className={`flex flex-col`}>
-        <ToasterClient />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex h-screen w-full">
-            {/* <SidebarLayout links={publicLinks} user={user}>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+          <ToasterClient />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="flex h-screen w-full">
+              {/* <SidebarLayout links={publicLinks} user={user}>
               </SidebarLayout> */}
-            {children}
-          </div>
-        </ThemeProvider>
+              <GridBackground>
+                {children}
+              </GridBackground>
+            </div>
+          </ThemeProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   );

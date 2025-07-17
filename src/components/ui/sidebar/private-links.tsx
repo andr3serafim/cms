@@ -1,12 +1,12 @@
 'use client'
 
 import {
-    IconArrowLeft,
     IconBrandTabler,
     IconSettings,
-    IconUserBolt,
+    IconPlaylistAdd,
+    IconListTree,
+
 } from "@tabler/icons-react";
-import { useAuthStore } from '@/store/use-auth-store';
 
 export const privateLinks = [
     {
@@ -15,23 +15,19 @@ export const privateLinks = [
         icon: <IconBrandTabler className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />,
     },
     {
-        label: "Profile",
-        href: "#",
-        icon: <IconUserBolt className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />,
+        label: "Criar novo post",
+        href: "/post/create",
+        icon: <IconPlaylistAdd
+            className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />,
+    },
+    {
+        label: "Postagens",
+        href: "/post",
+        icon: <IconListTree className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />,
     },
     {
         label: "Settings",
-        href: "#",
+        href: "/settings",
         icon: <IconSettings className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />,
-    },
-    {
-        label: "Logout",
-        function: async () => {
-            const logout = useAuthStore.getState().logout;
-            await logout();
-            // Redirecionar para login, se necessário:
-            window.location.href = '/login';
-        },
-        icon: <IconArrowLeft className="h-5 w-5 text-neutral-700 dark:text-neutral-200" />,
     },
 ];
