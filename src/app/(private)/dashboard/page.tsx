@@ -1,16 +1,18 @@
 'use client'
 
 import FileUpload from '@/components/file-upload';
+import ThemeToggle from '@/components/theme-toggle';
 // import useCheckJwt from '@/hooks/use-check-jwt';
 import { useHydration } from '@/hooks/use-hydratation';
 import { useAuthStore } from '@/store/use-auth-store';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 export default function Dashboard() {
   const { isAuthenticated, loading, fetchUser, user } = useAuthStore()
   const route = useRouter();
   const hydrated = useHydration();
+
 
   // useCheckJwt()
   useEffect(() => {
@@ -45,8 +47,11 @@ export default function Dashboard() {
   return (
     <div className='flex flex-col gap-3'>
       <h1 className='text-xl'>Dashboard</h1>
-      <p>Bem-vindo ao painel, <span className='text-lime-500'>{user?.name}!</span></p>
-      <div>
+      <div className='flex items-center justify-between'>
+        <p>Bem-vindo ao painel, <span className='text-lime-500'>{user?.name}!</span></p>
+        <ThemeToggle />
+      </div>
+      <div className='flex flex-col gap-2'>
         <FileUpload />
       </div>
     </div>
