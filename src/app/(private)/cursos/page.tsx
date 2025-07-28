@@ -1,6 +1,6 @@
 'use client'
 
-import { getCursos } from '@/services/curso/get-cursos';
+import { getCursos } from '@/services/origamid/get-cursos';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 

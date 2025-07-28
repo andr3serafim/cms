@@ -1,4 +1,4 @@
-import { getAula } from '@/services/curso/get-cursos';
+import { getAula } from '@/services/origamid/get-cursos';
 import React from 'react'
 
 type PageProps = {

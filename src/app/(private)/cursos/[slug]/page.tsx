@@ -1,5 +1,5 @@
 
-import { getCurso } from '@/services/curso/get-cursos';
+import { getCurso } from '@/services/origamid/get-cursos';
 import Link from 'next/link';
 import React from 'react'
 
